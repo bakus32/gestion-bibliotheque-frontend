@@ -1,0 +1,186 @@
+.global-container {
+    padding: 15px;
+    background-color: #fff;
+
+    .title-part {
+        color: var(--ion-color-secondary);
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        .btn-new {
+            background-color: var(--ion-color-secondary-tint);
+            color: #fff;
+            font-size: 12px;
+            border-radius: 5px;
+
+            &:focus {
+                box-shadow: none !important;
+            }
+
+            &:hover {
+                background-color: var(--green-color-cie);
+            }
+        }
+    }
+
+    table {
+        .table-heade-row {
+            background-color: rgba(var(--ion-color-dark-rgb),0.4);
+            color: #fff;
+            font-weight: 100;
+        }
+
+        thead {
+            tr {
+                th {
+                    :last-child {
+                        text-align: center;
+                        width: 80px;
+                    }
+
+                    &.th-action {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    &:first-child {
+                        // width: 75px;
+                    }
+
+                    .first-th {
+                        width: 40px;
+                        a {
+                            color: #fff;
+                            text-align: center;
+                        }
+                    }
+
+                    .search-part {
+                        input {
+                            width: 300px;
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+           
+        }
+
+        tbody {
+            tr {
+                td {
+                    font-size: 13px;
+                    vertical-align: middle !important;
+
+                    &.first {
+                        display: flex;
+                        justify-content: space-between;
+                        width: 50px;
+
+                        span {
+                            color: var(--ion-color-warning);
+                        }
+                    }
+                    :last-child {
+                        text-align: center;
+                        // width: 40px;
+                        
+                        i {
+                            padding-left: 10px;
+                            color: var(--ion-color-medium);
+                        }
+                    }
+
+                    &.td-action {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+
+                        .btn-actions {
+                            font-size: 12px;
+                            background-color: var(--ion-color-medium);
+                            color: #fff;
+                            padding: 5px 10px;
+
+                            &:focus {
+                                box-shadow: none !important;
+                            }
+                        }
+
+                        ul {
+                            li {
+                                font-size: 12px;
+                               
+
+                                a {
+                                    text-align: left !important;
+                                    cursor: pointer;
+
+                                    &:hover {
+                                        background-color: var(--ion-color-secondary-tint);
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    
+                    .badge {
+                        &.valide {
+                            background-color: var(--green-color-cie);
+                        }
+
+                        &.rejete {
+                            background-color: var(--ion-color-danger);
+                        }
+
+                        &.encours {
+                            background-color:rgba(var(--ion-color-secondary-rgb), 0.5);
+                        }
+                        
+                    }
+                  
+                }
+            }
+           
+        }
+    }
+}
+
+::ng-deep .modal-width-90 {
+    width: 90% !important;
+    max-width: none;
+}
+
+::ng-deep .modal-width-70 {
+    width: 70% !important;
+    max-width: none;
+}
+
+.custom-modal-header {
+    a {
+        color: var(--ion-color-medium);
+        cursor: pointer;
+    }
+}
+
+.form-user {
+    div {
+        margin-bottom: 15px;
+    }
+
+    .div-primary-manager {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        margin-bottom: 0;
+    }
+}

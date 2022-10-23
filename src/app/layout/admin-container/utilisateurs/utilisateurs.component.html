@@ -1,0 +1,135 @@
+<div class="global-container"  [ngBusy]="{busy: busyGet, message: 'Veuillez patienter ...', backdrop: false}">
+
+    <div class="title-part">
+        <b> Gestion des utilisateurs </b>
+
+        <button type="button" class="btn btn-new" (click)="openModal(templateCreateUser)">
+            <i class="fa fa-plus"></i>&nbsp;&nbsp; Nouvel utilisateur
+        </button>
+    </div>
+
+    <div class="body-part">
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th colspan="8" class="p-0">
+                        <div class="search-part p-0 mb-2">
+                            <input type="text" class="form-control" placeholder="Rechercher un utilisateur" [(ngModel)]="itemToSearch.searchFull"  (keypress)="getItem()"/>
+                        </div>
+                    </th>
+                </tr>
+                <tr class="table-heade-row">
+                    <th>
+                        <div class="first-th">  #
+                        </div>
+                    </th>
+                    <th>Matricule</th>
+                    <th>Nom</th>
+                    <th>Prénoms</th>
+                    <th>Login</th>
+                    <th>Email</th>
+                    <th>Profil</th>
+                    <th>Contact</th>
+                    <th class="th-action">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of listItems; let indice = index">
+                    <td>
+                        <div class="first">
+                            {{ indice + 1 }} <span *ngIf="item?.nb_essaie >= 3"> <i class="fa fa-lock"></i></span>
+                        </div>
+                    </td>
+                    <td>{{ item?.matricule }}</td>
+                    <td>{{ item?.nom }}</td>
+                    <td>{{ item?.prenoms }}</td>
+                    <td>{{ item?.login }}</td>
+
+                    <td>{{ item?.email }}</td>
+                    <td>{{ item?.roleLibelle }}</td>
+
+                    <td>{{ item?.contact }}</td>
+
+                    <td class="td-action">
+                        <div class="dropdown">
+                            <button class="btn btn-actions dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item"  (click)="openModal(templateCreateUser,item)">Modifier</a></li>
+                                <li><a class="dropdown-item"  (click)="confirmDeleteItem(item)">Supprimer</a></li>
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #templateCreateUser>
+    <div class="modal-header custom-modal-header">
+        <h4 class="modal-title pull-left">
+            <span> Création d'un utilisateur </span>
+        </h4>
+        <a class="pull-right" (click)="modalRefModal?.hide()">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-user">
+                <div class="col-12">
+                    <label>Nom </label>
+                    <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom" autoComplete="off"  [(ngModel)]="itemToSave.nom" />
+                </div>
+
+                <div class="form-group col-12">
+                    <label>Prénoms </label>
+                    <input type="text" name="prenoms" id="prenoms" class="form-control" placeholder="Prénoms"  [(ngModel)]="itemToSave.prenoms"
+                        autoComplete="off" />
+                </div>
+
+                <div class="form-group col-12">
+                    <label>Login </label>
+                    <input type="text" name="login" id="login" class="form-control" placeholder="login"  [(ngModel)]="itemToSave.login"
+                        autoComplete="off" />
+                </div>
+
+                <div class="col-12">
+                    <label>Email </label>
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Email"  [(ngModel)]="itemToSave.email"
+                        autoComplete="off" />
+                </div>
+
+                <div class="col-12">
+                    <label>Télephone </label>
+                    <input type="text" name="contact" id="contact" class="form-control" placeholder="Télephone" mask="separator"  [(ngModel)]="itemToSave.contact"
+                        autoComplete="off" />
+                </div>
+
+                <div class="col-12">
+                    <label>Profil </label>
+
+                    <select class="form-control custom_input" id="roleSelected" [(ngModel)]="itemToSave.roleId"
+                        name="roleSelected">
+                        <option value="">-- Choisissez --</option>
+                        <option *ngFor="let profil of listPorifls" [value]="profil.id">
+                            {{ profil.libelle }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="div-primary-manager" id="btn-primary-manager">
+                    <button type="button" class="fs-btn btn--primary" (click)="confirmSaveItem(itemToSave)">
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

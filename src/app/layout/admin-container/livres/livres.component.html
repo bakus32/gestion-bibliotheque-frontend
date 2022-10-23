@@ -1,0 +1,140 @@
+<div class="global-container"  [ngBusy]="{busy: busyGet, message: 'Veuillez patienter ...', backdrop: false}">
+
+    <div class="title-part">
+        <b> Gestion des livres </b>
+
+        <button type="button" class="btn btn-new" (click)="openModal(templateCreateUser)">
+            <i class="fa fa-plus"></i>&nbsp;&nbsp; Nouveau livre
+        </button>
+    </div>
+
+    <div class="body-part">
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th colspan="8" class="p-0">
+                        <div class="search-part p-0 mb-2">
+                            <input type="text" class="form-control" placeholder="Rechercher un livre" [(ngModel)]="itemToSearch.searchFull"  (keypress)="getItem()"/>
+                        </div>
+                    </th>
+                </tr>
+                <tr class="table-heade-row">
+                    <th>
+                        <div class="first-th">  #
+                        </div>
+                    </th>
+                    <th>Titre</th>
+                    <th>Categorie</th>
+                    <th>Maison Edition</th>
+                    <th>Nombre Exemplaires</th>
+                    <th>Nombre Pages</th>
+                    <th>Date publication</th>
+                    <th>Auteur</th>
+                    <th class="th-action">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of listItems; let indice = index">
+                    <td>
+                        <div class="first">
+                            {{ indice + 1 }} <span *ngIf="item?.nb_essaie >= 3"> <i class="fa fa-lock"></i></span>
+                        </div>
+                    </td>
+                    <td>{{ item?.titre }}</td>
+                    <td>{{ item?.categorieLivreLibelle }}</td>
+                    <td>{{ item?.maisonEdition }}</td>
+                    <td>{{ item?.nombreExemplaires }}</td>
+
+                    <td>{{ item?.nombrePages }}</td>
+                    <td>{{ item?.datePublication }}</td>
+
+                    <td>{{ item?.auteurs.nom }}</td>
+
+                    <td class="td-action">
+                        <div class="dropdown">
+                            <button class="btn btn-actions dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item"  (click)="openModal(templateCreateUser,item)">Modifier</a></li>
+                                <li><a class="dropdown-item"  (click)="confirmDeleteItem(item)">Supprimer</a></li>
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #templateCreateUser>
+    <div class="modal-header custom-modal-header">
+        <h4 class="modal-title pull-left">
+            <span> Création d'un livre </span>
+        </h4>
+        <a class="pull-right" (click)="modalRefModal?.hide()">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-user">
+                <div class="col-12">
+                    <label>titre </label>
+                    <input type="text" name="titre" id="titre" class="form-control" placeholder="Livre" autoComplete="off"  [(ngModel)]="itemToSave.titre" />
+                </div>
+
+                <div class="form-group col-12">
+                    <label>Maison Edition </label>
+                    <input type="text" name="maisonEdition" id="maisonEdition" class="form-control" placeholder="Maison Edition"  [(ngModel)]="itemToSave.maisonEdition"
+                        autoComplete="off" />
+                </div>
+
+                <div class="form-group col-12">
+                    <label>Nombre d'exemplaires </label>
+                    <input type="text" name="nombreExemplaires" id="nombreExemplaires" class="form-control" placeholder="Nombre d'exemplaires"  [(ngModel)]="itemToSave.nombreExemplaires"
+                        autoComplete="off" />
+                </div>
+
+                <div class="col-12">
+                    <label>Nombre de pages </label>
+                    <input type="text" name="nombrePages" id="nombrePages" class="form-control" placeholder="Nombre de pages"  [(ngModel)]="itemToSave.nombrePages"
+                        autoComplete="off" />
+                </div>
+
+                <div class="col-12">
+                    <label>Date de publication </label>
+                    <!-- <input type="text" name="datePublication" id="datePublication" class="form-control" placeholder="Date de publication" mask="separator"  [(ngModel)]="itemToSave.datePublication"
+                        autoComplete="off" /> -->
+                        <input class="form-control " placeholder="Date de publication " autocomplete="off"
+                [(ngModel)]="itemToSave.datePublication" bsDatepicker [bsConfig]="{
+                  dateInputFormat: 'DD/MM/YYYY',
+                  containerClass: 'theme-dark-blue'
+                }" name="datePublication" type="text" />
+                </div>
+
+                <div class="col-12">
+                    <label>Categorie </label>
+
+                    <select class="form-control custom_input" id="categorieSelected" [(ngModel)]="itemToSave.categorieId"
+                        name="categorieSelected">
+                        <option value="">-- Choisissez --</option>
+                        <option *ngFor="let categorie of listCategories" [value]="categorie.id">
+                            {{ categorie.libelle }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="div-primary-manager" id="btn-primary-manager">
+                    <button type="button" class="fs-btn btn--primary" (click)="confirmSaveItem()">
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

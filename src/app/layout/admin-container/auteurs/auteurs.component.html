@@ -1,0 +1,110 @@
+<div class="global-container"  [ngBusy]="{busy: busyGet, message: 'Veuillez patienter ...', backdrop: false}">
+
+    <div class="title-part">
+        <b> Gestion des auteurs </b>
+
+        <button type="button" class="btn btn-new" (click)="openModal(templateCreateOrUpdate)">
+            <i class="fa fa-plus"></i>&nbsp;&nbsp; Nouvel auteur
+        </button>
+    </div>
+
+    <div class="body-part">
+        <table class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th colspan="8" class="p-0">
+                        <div class="search-part p-0 mb-2">
+                            <input type="text" class="form-control" placeholder="Rechercher un auteur"  [(ngModel)]="itemToSearch.searchFull"  (keypress)="getItem()" />
+                        </div>
+                    </th>
+                </tr>
+                <tr class="table-heade-row">
+                    <th>
+                        <div class="first-th">  #
+                        </div>
+                    </th>
+                    <th>Nom</th>
+                    <th>Prénoms</th>
+                    <th>Spécialité</th>
+                    <th class="th-action">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of listItems; let indice = index">
+                    <td>
+                        <div class="first">
+                            {{ indice + 1 }} <span *ngIf="item?.nb_essaie >= 3"> <i class="fa fa-lock"></i></span>
+                        </div>
+                    </td>
+                    <td>{{ item?.nom }}</td>
+                    <td>{{ item?.prenoms }}</td>
+
+                    <td>{{ item?.specialite }}</td>
+                   
+
+                    <td class="td-action">
+                        <div class="dropdown">
+                            <button class="btn btn-actions dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item"  (click)="openModal(templateCreateOrUpdate,item)">Modifier</a></li>
+                                <li><a class="dropdown-item"  (click)="confirmDeleteItem(item)">Supprimer</a></li>
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr *ngIf="!listItems || listItems.length == 0">
+                    <td colspan="5" style="text-align: center"> Aucune donnée disponible </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<ng-template #templateCreateOrUpdate>
+    <div class="modal-header custom-modal-header">
+        <h4 class="modal-title pull-left">
+            <span> {{itemToSave?.id ? 'Modification' : 'Création'}} d'un auteur </span>
+        </h4>
+        <a class="pull-right" (click)="modalRefModal?.hide()">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-user">
+                <div class="col-12">
+                    <label>Nom </label>
+                    <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom" autoComplete="off"  [(ngModel)]="itemToSave.nom" />
+                </div>
+
+                <div class="form-group col-12">
+                    <label>Prénoms </label>
+                    <input type="text" name="prenom" id="prenom" class="form-control" placeholder="Prénoms"  [(ngModel)]="itemToSave.prenoms"
+                        autoComplete="off" />
+                </div>
+
+                <div class="col-12">
+                    <label>Specialiié </label>
+                    <input type="text" name="specialite" id="specialite" class="form-control" placeholder="Specialiié"  [(ngModel)]="itemToSave.specialite"
+                        autoComplete="off" />
+                </div>
+
+
+                <div class="div-primary-manager" id="btn-primary-manager">
+                    <button type="button" class="fs-btn btn--primary" (click)="confirmSaveItem(itemToSave)">
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

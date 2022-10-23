@@ -1,0 +1,16 @@
+.dashbord-container {
+    padding: 15px;
+    background-color: #fff;
+
+    .body-part {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 150px);
+        span {
+            font-weight: bold;
+            font-size: 40px;
+        }
+    }
+
+}

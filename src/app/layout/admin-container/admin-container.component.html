@@ -1,0 +1,70 @@
+<div class="fs-container">
+    <div class="fs-sidebar-container">
+        <a href="" class="fs-logo">
+            <img src="assets/img/logo_app.png" />
+        </a>
+        <div class="fs-sidebar">
+           
+
+            <div class="menu-items">
+                <ul>
+                    <li  routerLink="/administration/dashbord"  routerLinkActive="active">
+                        Tableau de bord 
+                    </li>
+                    <li routerLink="/administration/auteurs" routerLinkActive="active">
+                        Auteurs
+                    </li>
+
+                    <li routerLink="/administration/categories" routerLinkActive="active">
+                        Catégorie
+                    </li>
+
+                    <li routerLink="/administration/livres" routerLinkActive="active">
+                        Livres
+                    </li>
+                    <li routerLink="/administration/utilisateurs" routerLinkActive="active">
+                        Utilisateurs
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="fs-content">
+        <div class="fs-header">
+            <div class="fs-profil-container">
+              
+                <div class="dropdown">
+                    <button class="btn btn-userInformation dropdown-toggle" type="button" id=""
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="text-capitalize"> {{user?.nom + ' '+user?.prenom}} </span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" (click)="openModal(templateUpdatePass)">Modifier mon mot de
+                                passe</a></li>
+                        <li> <a class="dropdown-item" (click)="deconnexion()">Deconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="fs-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #templateUpdatePass>
+    <div class="modal-header custom-modal-header">
+        <h4 class="modal-title pull-left">
+            <span> Modifier mes accès </span>
+        </h4>
+        <a class="pull-right" (click)="modalRefModal?.hide()">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+
+    <div class="modal-body">
+        <app-update-password (closeModal)="modalRefModal?.hide()"></app-update-password>
+    </div>
+</ng-template>

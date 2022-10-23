@@ -1,0 +1,62 @@
+<div class="fs-container">
+    <div class="auth-container">
+        <div class="welcome-container">
+            <h5>Bienvenue sur</h5>
+            <h4>GESTION BIBLIO</h4>
+            <img src="assets/img/login-bg.png" alt="" srcset="">
+        </div>
+
+        <div class="form-container"
+            [ngBusy]="{busy: busyConnexion, message: 'Veuillez patienter ...', backdrop: false}">
+
+            <form name="formulaireConnexion" (ngSubmit)="login()" *ngIf="!canUpdatePassword && !hasPasswordWordForget">
+                <div class="connexion-form">
+                    <img src="assets/img/logo_app.png" alt="Logo App" srcset="">
+                    <h3>Connexion</h3>
+                    <div class="fs-form-body">
+                        <div class="fs-form-control">
+                            <input type="text" name="Identifiant" value="" autocomplete="off" placeholder="Identifiant"
+                                [(ngModel)]="itemToSave.identifiant">
+                        </div>
+                        <div class="fs-form-control">
+                            <input type="password" name="password" value="" autocomplete="off"
+                                placeholder="Mot de passe" [(ngModel)]="itemToSave.password">
+                        </div>
+
+                        <div class="fs-form-control capcha">
+                            <span> {{codeGenerate}} </span>
+                            <input type="text" placeholder="Saisissez le code captcha" autocomplete="off" name="capchar"
+                                [(ngModel)]="itemToSave.codeCapchar" />
+                            <a (click)="generateCode()"><i class="fa fa-refresh"></i></a>
+                        </div>
+
+                        <div class="forbidden">
+                            <a (click)="hasPasswordWordForget = true">Mot de passe oublié ?</a>
+                        </div>
+                    </div>
+                    <button class="fs-btn btn--primary" type="submit" (click)="login()">Se connecter</button>
+                </div>
+            </form>
+
+            <form name="formulaireConnexion" *ngIf="hasPasswordWordForget">
+                <div class="connexion-form">
+                    <img src="assets/img/logo_app.png" alt="Logo App" srcset="">
+                    <h3>Mot de passe oublié</h3>
+                    <div class="fs-form-body">
+                        <div class="fs-form-control">
+                            <input type="text" name="Identifiant" value="" autocomplete="off" placeholder="Identifiant"
+                                [(ngModel)]="itemToSave.email">
+                        </div>
+                        <div class="forbidden">
+                            <a (click)="hasPasswordWordForget = false">Se connecter</a>
+                        </div>
+                    </div>
+                    <button class="fs-btn btn--primary" type="button">Valider</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

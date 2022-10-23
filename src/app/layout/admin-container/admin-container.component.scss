@@ -1,0 +1,156 @@
+
+
+.fs-container{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0px;
+  width: 100vw;
+  height: 100vh;
+
+  .fs-sidebar-container{
+    width: 200px !important;
+    height: 100vh;
+    box-shadow: 1px 1px 24px rgba($color: #000000, $alpha: 0.10);
+
+    a.fs-logo{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      border-bottom: 1px solid var(--biblio-color-bg);
+      text-decoration: none;
+
+      img{
+        width: 80%;
+      }
+    }
+    .fs-sidebar{
+      width: 100%;
+      flex: 1;
+      position: relative;
+      padding: 0 5px;
+
+      .menu-items{
+        left: 0px;
+        height: 320px;
+        width: 100%;
+
+        ul{
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          // gap: 10px;
+          height: 100%;
+          width: 100%;
+          padding: 0px;
+          margin-top:20px;
+          
+          li{
+            display: flex;
+            align-items:center ;
+            justify-content: left;
+            cursor: pointer;
+            list-style: none;
+            border-radius: 8px;
+            margin: 0px;
+            border-top: 1px solid #eceeee;
+            padding:0 5px;
+            height: 50px;
+            width: 100%;
+            background-color: rgba($color: #ffffff, $alpha: 0.20);
+            transition: all 300ms ease-in-out;
+        
+
+            &.active{
+              // height: 60px;
+              width: 100%;
+              background-color: var(--biblio-color-primary);
+              color: #fff;
+            }
+
+            &:hover{
+              background-color: var(--biblio-color-primary);
+              color: #fff;
+            }
+
+            
+          }
+        }
+      }
+    }
+  }
+
+  .fs-content{
+    flex: 1;
+    height: 100%;
+    background-color: var(--biblio-color-bg);
+
+    .fs-header{
+      width: 100%;
+      height: 60px;
+      background-color: rgba($color: #ffffff, $alpha: 0.50);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0px 20px;
+
+      .fs-profil-container {
+
+        display: flex;
+        justify-content: space-between;
+
+        .btn-navigation {
+          border: 1px solid var(--ion-color-medium);
+          background-color: #ffffff;
+          border-radius: 5px;
+          
+          &:hover {
+            color: var(--ion-color-secondary-tint);
+            border : 1px solid var(--ion-color-secondary-tint);
+          }
+        }
+
+        .btn-userInformation {
+          &:focus {
+            box-shadow: none;
+          }
+
+          sup {
+            color: #fff; 
+            background-color: var(--biblio-color-primary);
+            padding: 1px 4px;
+            border-radius: 50%;
+            font-size: 11px;
+          }
+        }
+
+        .dropdown-menu li{
+          cursor: pointer;
+        }
+      }
+
+      .fs-logo{
+        img {
+          height: 40px;
+        }
+      }
+    }
+
+    .fs-body{
+      height: calc(100% - 60px);
+      width: 100%;
+      padding: 20px;
+      overflow: auto;
+    }
+  }
+}
+
+.custom-modal-header {
+  a {
+      color: var(--ion-color-medium);
+      cursor: pointer;
+  }
+}
